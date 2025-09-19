@@ -422,11 +422,11 @@
             <h2>CONFIRMACIÓN DE ASISTENCIA</h2>
             <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">Por favor, confirma tu asistencia antes del 20 de Noviembre de 2025</p>
             
-            <!-- FORMULARIO MODIFICADO - REEMPLAZA TU-EMAIL@GMAIL.COM CON TU EMAIL REAL -->
-            <form id="attendance-form" action="https://formsubmit.co/tu-email@gmail.com" method="POST">
+            <!-- FORMULARIO MODIFICADO - CAMBIO DE CORREO A TELÉFONO -->
+            <form id="attendance-form" action="https://formsubmit.co/estrada.interc@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="Nueva confirmación de boda - Jordy & Madelyn">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="https://tusuario.github.io/nombre-repositorio/confirmacion.html">
+                <input type="hidden" name="_next" value="https://Shordy11.github.io/boda-jordy-madelynn/confirmacion.html">
                 <input type="hidden" name="_captcha" value="false">
                 
                 <div class="form-group">
@@ -435,8 +435,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Correo electrónico *</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="phone">Número de teléfono *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Ej: +502 1234 5678" required pattern="[0-9+][0-9\s]{8,}">
+                    <small style="display: block; margin-top: 5px; color: #7f8c8d;">Incluye código de país y área si es necesario</small>
                 </div>
                 
                 <div class="form-group">
@@ -486,6 +487,12 @@
             
             event.currentTarget.classList.add('selected');
         }
+        
+        // Validación personalizada para el teléfono
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Permite solo números, espacios y el signo +
+            this.value = this.value.replace(/[^0-9+\s]/g, '');
+        });
         
         // Countdown timer
         function updateCountdown() {
