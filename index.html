@@ -426,7 +426,7 @@
             <form id="attendance-form" action="https://formsubmit.co/estrada.interc@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="Nueva confirmación de boda - Jordy & Madelyn">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="https://Shordy11.github.io/boda-jordy-madelynn/confirmacion.html">
+                <input type="hidden" name="_next" value="https://Shordy11.github.io/boda-jordy-madelynn/">
                 <input type="hidden" name="_captcha" value="false">
                 
                 <div class="form-group">
@@ -435,9 +435,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone">Número de teléfono *</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Ej: +502 1234 5678" required pattern="[0-9+][0-9\s]{8,}">
-                    <small style="display: block; margin-top: 5px; color: #7f8c8d;">Incluye código de país y área si es necesario</small>
+                    <label for="phone">Número de teléfono * (8 dígitos)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Ej: 12345678" required pattern="[0-9]{8}" title="Por favor ingresa exactamente 8 dígitos numéricos" maxlength="8">
+                    <small style="display: block; margin-top: 5px; color: #7f8c8d;">Solo números, sin espacios ni guiones (8 dígitos)</small>
                 </div>
                 
                 <div class="form-group">
@@ -488,10 +488,15 @@
             event.currentTarget.classList.add('selected');
         }
         
-        // Validación personalizada para el teléfono
+        // Validación personalizada para el teléfono (solo números, máximo 8 dígitos)
         document.getElementById('phone').addEventListener('input', function(e) {
-            // Permite solo números, espacios y el signo +
-            this.value = this.value.replace(/[^0-9+\s]/g, '');
+            // Permite solo números
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // Limita a 8 caracteres
+            if (this.value.length > 8) {
+                this.value = this.value.slice(0, 8);
+            }
         });
         
         // Countdown timer
