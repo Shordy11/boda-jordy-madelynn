@@ -329,6 +329,35 @@
             color: #2c3e50;
             text-decoration: underline;
         }
+
+        /* Notificación de envío exitoso */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .notification i {
+            font-size: 1.5rem;
+            color: #ffdb6e;
+        }
         
         @media (max-width: 768px) {
             .attendance-options {
@@ -347,6 +376,12 @@
             
             .countdown-number {
                 font-size: 2rem;
+            }
+            
+            .notification {
+                left: 20px;
+                right: 20px;
+                text-align: center;
             }
             
             .gold-title {
@@ -388,6 +423,12 @@
     </style>
 </head>
 <body>
+    <!-- Notificación de envío exitoso -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>¡Confirmación enviada con éxito!</span>
+    </div>
+
     <div class="container">
         <header>
             <h1 class="gold-title">CELEBRACIÓN DE NUESTRA BODA</h1>
@@ -499,6 +540,31 @@
             }
         });
         
+        // Función para mostrar notificación
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            // Ocultar la notificación después de 5 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Manejar el envío del formulario
+        document.getElementById('attendance-form').addEventListener('submit', function(e) {
+            // Prevenir el envío normal para mostrar la notificación primero
+            e.preventDefault();
+            
+            // Mostrar notificación
+            showNotification();
+            
+            // Opcional: Reiniciar el formulario después de enviar
+            setTimeout(() => {
+                this.submit();
+            }, 1000);
+        });
+        
         // Countdown timer
         function updateCountdown() {
             const weddingDate = new Date('December 6, 2025 16:00:00').getTime();
@@ -523,5 +589,4 @@
         setInterval(updateCountdown, 1000);
     </script>
 </body>
-
 </html>
